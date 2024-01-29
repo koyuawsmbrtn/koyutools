@@ -1,0 +1,18 @@
+#!/bin/bash
+rm -rf /tmp/wasx
+export NAME="$(basename $1 .wastickers)"
+mkdir /tmp/wasx
+mv $1 /tmp/wasx/pack.zip
+unzip /tmp/wasx/pack.zip -d /tmp/wasx
+rm -f /tmp/wasx/*.txt
+rm -f /tmp/wasx/pack.zip
+rm -f $1
+rm -rf $NAME
+mkdir $NAME
+cd $NAME
+cp /tmp/wasx/*.png .
+cp /tmp/wasx/*.webp .
+for file in *.webp; do convert $file "`basename $file .webp`.png"; done
+rm -f *.webp
+mogrify -resize 512x ./*.png
+rm -rf /tmp/wasx
