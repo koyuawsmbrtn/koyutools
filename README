@@ -1,3 +1,4 @@
 A collection of scripts and tools used internally to do certain tasks
 
 wastickerx: Converts WhatsApp stickers (.wastickers) to be used in other applications like Signal
+depdf: Decrypts a PDF file
