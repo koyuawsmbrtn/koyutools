@@ -10,6 +10,8 @@ from bs4 import BeautifulSoup
 f = open("tracks.txt", "r")
 tracks = f.readlines()
 f.close()
+tracknum = len(tracks)
+currtrack = 0
 
 os.system("rm -f audio.mp3")
 os.system("rm -f audio.jpg")
@@ -22,14 +24,15 @@ except:
     downloaded = []
 
 for surl in tracks:
+    currtrack = currtrack + 1
     try:
         trackid = surl.replace("https://open.spotify.com/track/", "").split("?")[0]
     except:
         trackid = surl.replace("https://open.spotify.com/track/", "")
     if not trackid in downloaded:
+        print("Track " + str(currtrack) + " of " + str(tracknum) + " (" + trackid.split("\n")[0] + ")")
         if not "http" in surl:
             surl = "https://open.spotify.com/track/" + surl
-        print(trackid)
         print("Downloading...")
         with urllib.request.urlopen(surl) as response:
             r = response.read().decode()
