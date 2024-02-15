@@ -6,4 +6,5 @@ qrdrop: Reads any QR code displayed on the screen and outputs the result to the 
 
 Use at your own risk tools:
 spoti.py: Python script to convert Spotify playlists into MP3 using yt-dlp and a few other tools
+playlister: Python script to convert spoti.py track files to m3u playlists to be used in apps like iTunes
 nitrogen: Discord Nitro gift code generator using the Opera GX exploit. You may have to generate your own partnerUserId.
