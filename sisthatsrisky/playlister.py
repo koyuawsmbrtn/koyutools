@@ -11,7 +11,9 @@ f.close()
 tracknum = len(tracks)
 currtrack = 0
 
-os.system("rm -f playlist.m3u")
+filenamewo = arg.split(".")[0]
+
+os.system("rm -f "+filenamewo+".m3u")
 
 for surl in tracks:
     currtrack = currtrack + 1
@@ -30,6 +32,6 @@ for surl in tracks:
     title = soup.find("meta", {"property": "og:title"})["content"]
     filename = artist.replace(" ", "-").replace("/", "-") + "_" + title.replace(" ", "-").replace("/", "-") + ".mp3"
     if os.path.exists(filename):
-        f = open("playlist.m3u", "a+", encoding="utf-8")
+        f = open(filenamewo+".m3u", "a+", encoding="utf-8")
         f.write(filename + "\n")
         f.close()
