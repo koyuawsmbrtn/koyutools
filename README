@@ -3,8 +3,9 @@ A collection of scripts and tools used internally to do certain tasks
 wastickerx: Converts WhatsApp stickers (.wastickers) to be used in other applications like Signal
 depdf: Decrypts a PDF file
 qrdrop: Reads any QR code displayed on the screen and outputs the result to the terminal
+playlistconverter.py: Converts PLS playlists to M3U since for some reason Rhythmbox syncs PLS playlists to my iPod instead and Rockbox can't read them
 
 Use at your own risk tools:
 spoti.py: Python script to convert Spotify playlists into MP3 using yt-dlp and a few other tools
 playlister: Python script to convert spoti.py track files to m3u playlists to be used in apps like iTunes
-nitrogen: Discord Nitro gift code generator using the Opera GX exploit. You may have to generate your own partnerUserId.
+nitrogen: Discord Nitro gift code generator using the Opera GX exploit. You may have to generate your own partnerUserId. (broken, stands here as poc)
