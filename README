@@ -4,6 +4,7 @@ wastickerx: Converts WhatsApp stickers (.wastickers) to be used in other applica
 depdf: Decrypts a PDF file
 qrdrop: Reads any QR code displayed on the screen and outputs the result to the terminal
 playlistconverter.py: Converts PLS playlists to M3U since for some reason Rhythmbox syncs PLS playlists to my iPod instead and Rockbox can't read them
+plcheck.py: Checks if /Music/ is at the beginning of every playlist since Music on my iPod is stored on /Music/
 
 Use at your own risk tools:
 spoti.py: Python script to convert Spotify playlists into MP3 using yt-dlp and a few other tools
