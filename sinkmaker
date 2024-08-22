@@ -1,0 +1,4 @@
+pulseaudio -k
+pactl load-module module-null-sink sink_name=v1 sink_properties=device.description="v1"
+pactl load-module module-loopback sink=v1
+pactl load-module module-loopback sink=v1
