@@ -55,7 +55,10 @@ for surl in tracks:
             print(title)
             query = artist + " - " + title
             print(query)
-            videoId = yt.search(query)[0]["videoId"]
+            try:
+                videoId = yt.search(query)[0]["videoId"]
+            except:
+                videoId = None
             if not videoId == None:
                 cmd = ["yt-dlp", "--no-continue", "--add-metadata", "-x", "--prefer-ffmpeg", "--extract-audio", "-v", "--audio-format", "mp3", "--output", "audio.%(ext)s", videoId]
             else:
