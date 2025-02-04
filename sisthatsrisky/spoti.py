@@ -56,7 +56,7 @@ for surl in tracks:
             query = artist + " - " + title
             print(query)
             try:
-                videoId = yt.search(query)[0]["videoId"]
+                videoId = yt.search(query, "songs")[0]["videoId"]
             except:
                 videoId = None
             if not videoId == None:
