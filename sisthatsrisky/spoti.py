@@ -46,11 +46,13 @@ for surl in tracks:
             data = json.loads(soup.find("script", {"type": "application/ld+json"}).contents[0])
             cover = soup.find("meta", {"property": "og:image"})["content"]
             year = data["datePublished"]
+            track = soup.find("meta", {"name": "music:album:track"})["content"]
             albumurl = soup.find("meta", {"name": "music:album"})["content"]
             with urllib.request.urlopen(albumurl) as response2:
                 r2 = response2.read().decode()
             soup2 = BeautifulSoup(r2, "lxml")
             albumtitle = soup2.find("meta", {"property": "og:title"})["content"]
+            album_maxtracks = soup2.find("meta", {"property": "og:description"})["content"].split(" · ")[3].split(" ")[0]
             os.system("wget -O audio.jpg \"" + cover + "\"")
             print(title)
             query = artist + " - " + title
@@ -65,7 +67,7 @@ for surl in tracks:
                 cmd = ["yt-dlp", "--no-continue", "--add-metadata", "-v", "--prefer-ffmpeg", "--extract-audio", "-v", "--audio-format", "mp3", "--output", "audio.%(ext)s", "ytsearch:\"" + query + "\"", "--no-playlist"]
             subprocess.Popen(cmd, shell=False).wait()
             print("Converting...")
-            subprocess.Popen(["lame", "-b", "320", "--ti", "audio.jpg", "--ta", artist, "--tt", title, "--ty", year, "--tl", albumtitle, "audio.mp3", filename], shell=False).wait()
+            subprocess.Popen(["lame", "-b", "320", "--ti", "audio.jpg", "--ta", artist, "--tt", title, "--ty", year, "--tl", albumtitle, "--tn", track+"/"+album_maxtracks, "audio.mp3", filename], shell=False).wait()
             os.system("rm audio.mp3")
             os.system("rm audio.jpg")
             print("Done!")
