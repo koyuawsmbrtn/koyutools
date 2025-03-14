@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+import re
+import unicodedata
 import urllib.request
 import html
 import os
@@ -17,6 +19,26 @@ currtrack = 0
 
 os.system("rm -f audio.mp3")
 os.system("rm -f audio.jpg")
+
+# Taken from https://github.com/django/django/blob/main/django/utils/text.py
+def slugify(value, allow_unicode=False):
+    """
+    Convert to ASCII if 'allow_unicode' is False. Convert spaces or repeated
+    dashes to single dashes. Remove characters that aren't alphanumerics,
+    underscores, or hyphens. Convert to lowercase. Also strip leading and
+    trailing whitespace, dashes, and underscores.
+    """
+    value = str(value)
+    if allow_unicode:
+        value = unicodedata.normalize("NFKC", value)
+    else:
+        value = (
+            unicodedata.normalize("NFKD", value)
+            .encode("ascii", "ignore")
+            .decode("ascii")
+        )
+    value = re.sub(r"[^\w\s-]", "", value.lower())
+    return re.sub(r"[-\s]+", "-", value).strip("-_")
 
 try:
     f = open("downloaded.txt", "r")
@@ -41,7 +63,8 @@ for surl in tracks:
         soup = BeautifulSoup(r, "lxml")
         artist = soup.find("meta", {"name": "music:musician_description"})["content"]
         title = soup.find("meta", {"property": "og:title"})["content"]
-        filename = artist.replace(" ", "-").replace("/", "-") + "_" + title.replace(" ", "-").replace("/", "-") + ".mp3"
+        filename = artist.replace(" ", "-").replace("/", "-") + "_" + title.replace(" ", "-").replace("/", "-")
+        filename = slugify(filename) + ".mp3"
         if not os.path.exists(filename):
             data = json.loads(soup.find("script", {"type": "application/ld+json"}).contents[0])
             cover = soup.find("meta", {"property": "og:image"})["content"]
