@@ -39,9 +39,9 @@ filenamewo = arg.split(".")[0]
 os.system("rm -f "+filenamewo+".m3u")
 for surl in tracks:
     currtrack = currtrack + 1
-    if currtrack % 300 == 0:
-        print(f"Processed {currtrack} tracks. Taking a 60 second break...")
-        time.sleep(60)
+    if currtrack % 200 == 0:
+        print(f"Processed {currtrack} tracks. Taking a 30 second break...")
+        time.sleep(30)
     try:
         trackid = surl.replace("https://open.spotify.com/track/", "").split("?")[0]
     except:
