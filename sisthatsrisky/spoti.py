@@ -3,10 +3,10 @@
 import re
 import unicodedata
 import urllib.request
-import html
 import os
 import subprocess
 import json
+import time
 from bs4 import BeautifulSoup
 import ytmusicapi
 
@@ -49,6 +49,11 @@ except:
 
 for surl in tracks:
     currtrack = currtrack + 1
+
+    if currtrack % 300 == 0:
+        print(f"Processed {currtrack} tracks. Taking a 60 second break...")
+        time.sleep(60)
+
     try:
         trackid = surl.replace("https://open.spotify.com/track/", "").split("?")[0]
     except:
