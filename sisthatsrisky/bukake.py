@@ -6,6 +6,7 @@ Supports fallback to German subtitles or English subtitles if German audio not a
 """
 
 import argparse
+import random
 import requests
 import subprocess
 import sys
@@ -150,28 +151,32 @@ def main():
                 print(f"  Unexpected error: {e}")
                 continue
     
-    # Send all URLs to jDownloader via clipboard
+    # Send URLs to jDownloader via clipboard one by one
     if download_links:
         print(f"\nFound {len(download_links)} download links")
-        print("Sending to jDownloader via clipboard...")
+        print("Sending to jDownloader via clipboard (one by one with random delays)...")
         
-        # Join all URLs with newlines
-        urls_text = '\n'.join(download_links)
+        for i, url in enumerate(download_links, 1):
+            try:
+                # Use wl-copy to send to clipboard
+                subprocess.run(['wl-copy'], input=url.encode('utf-8'), check=True)
+                print(f"  [{i}/{len(download_links)}] Copied: {url}")
+                
+                # Wait random time between 1-3 seconds before next copy (except for last one)
+                if i < len(download_links):
+                    delay = random.uniform(1.0, 3.0)
+                    print(f"    Waiting {delay:.1f}s before next copy...")
+                    time.sleep(delay)
+                    
+            except subprocess.CalledProcessError as e:
+                print(f"  Error copying to clipboard: {e}")
+                print(f"  Failed URL: {url}")
+            except FileNotFoundError:
+                print("  wl-copy not found. Make sure wl-clipboard is installed.")
+                print(f"  Failed URL: {url}")
+                break
         
-        try:
-            # Use wl-copy to send to clipboard
-            subprocess.run(['wl-copy'], input=urls_text.encode('utf-8'), check=True)
-            print("Successfully copied URLs to clipboard for jDownloader")
-        except subprocess.CalledProcessError as e:
-            print(f"Error copying to clipboard: {e}")
-            print("URLs that would have been copied:")
-            for url in download_links:
-                print(f"  {url}")
-        except FileNotFoundError:
-            print("wl-copy not found. Make sure wl-clipboard is installed.")
-            print("URLs that would have been copied:")
-            for url in download_links:
-                print(f"  {url}")
+        print("Finished copying all URLs to clipboard for jDownloader")
     else:
         print("No download links found")
 
