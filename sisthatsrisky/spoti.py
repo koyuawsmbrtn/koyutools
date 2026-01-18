@@ -192,7 +192,7 @@ if not interactive_mode:
                 with urllib.request.urlopen(albumurl) as response2:
                     r2 = response2.read().decode()
                 soup2 = BeautifulSoup(r2, "lxml")
-                albumtitle = soup2.find("meta", {"property": "og:title"})["content"]
+                albumtitle = soup2.find("meta", {"property": "og:title"})["content"].split(" - ")[0]
                 album_maxtracks = soup2.find("meta", {"property": "og:description"})["content"].split(" · ")[3].split(" ")[0]
             
             query = artist + " - " + title
