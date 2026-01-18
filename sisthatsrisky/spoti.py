@@ -66,7 +66,7 @@ for surl in tracks:
         with urllib.request.urlopen(surl) as response:
             r = response.read().decode()
         soup = BeautifulSoup(r, "lxml")
-        artist = soup.find("meta", {"name": "music:musician_description"})["content"]
+        artist = soup.find("meta", {"name": "music:musician_description"})["content"].split(",")[0]
         title = soup.find("meta", {"property": "og:title"})["content"]
         filename = artist.replace(" ", "-").replace("/", "-") + "_" + title.replace(" ", "-").replace("/", "-")
         filename = slugify(filename) + ".mp3"
