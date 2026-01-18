@@ -209,9 +209,9 @@ if not interactive_mode:
             except:
                 videoId = None
             if not videoId == None:
-                cmd = ["yt-dlp", "--no-continue", "--add-metadata", "-x", "--prefer-ffmpeg", "--extract-audio", "-v", "--audio-format", "mp3", "--output", "audio.%(ext)s", "https://youtu.be/"+videoId]
+                cmd = ["yt-dlp", "--no-continue", "--add-metadata", "-x", "--extract-audio", "-v", "--audio-format", "mp3", "--output", "audio.%(ext)s", "https://youtu.be/"+videoId]
             else:
-                cmd = ["yt-dlp", "--no-continue", "--add-metadata", "-v", "--prefer-ffmpeg", "--extract-audio", "-v", "--audio-format", "mp3", "--output", "audio.%(ext)s", "ytsearch:\"" + query + "\"", "--no-playlist"]
+                cmd = ["yt-dlp", "--no-continue", "--add-metadata", "-v", "--extract-audio", "-v", "--audio-format", "mp3", "--output", "audio.%(ext)s", "ytsearch:\"" + query + "\"", "--no-playlist"]
             subprocess.Popen(cmd, shell=False).wait()
             print("Converting...")
             lame_cmd = ["lame", "-b", "320"]
@@ -292,9 +292,9 @@ else:
                 except:
                     videoId = None
                 if not videoId == None:
-                    cmd = ["yt-dlp", "--no-continue", "--add-metadata", "-x", "--prefer-ffmpeg", "--extract-audio", "-v", "--audio-format", "mp3", "--output", "audio.%(ext)s", "https://youtu.be/"+videoId]
+                    cmd = ["yt-dlp", "--no-continue", "--add-metadata", "-x", "--extract-audio", "-v", "--audio-format", "mp3", "--output", "audio.%(ext)s", "https://youtu.be/"+videoId]
                 else:
-                    cmd = ["yt-dlp", "--no-continue", "--add-metadata", "-v", "--prefer-ffmpeg", "--extract-audio", "-v", "--audio-format", "mp3", "--output", "audio.%(ext)s", "ytsearch:\"" + query + "\"", "--no-playlist"]
+                    cmd = ["yt-dlp", "--no-continue", "--add-metadata", "-v", "--extract-audio", "-v", "--audio-format", "mp3", "--output", "audio.%(ext)s", "ytsearch:\"" + query + "\"", "--no-playlist"]
                 subprocess.Popen(cmd, shell=False).wait()
                 print("Converting...")
                 lame_cmd = ["lame", "-b", "320"]
