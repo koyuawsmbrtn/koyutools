@@ -26,7 +26,7 @@ if interactive_mode:
         if query.lower() == "exit":
             break
         if query:
-            tracks.append(query)
+            tracks.append("#custom:" + query)
 else:
     f = open("tracks.txt", "r")
     tracks = f.readlines()
