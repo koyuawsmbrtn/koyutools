@@ -159,16 +159,20 @@ if not interactive_mode:
             time.sleep(60)
 
         # Check if this is a custom entry
+        # Initialize variables with defaults
+        artist = "Unknown"
+        title = "Unknown"
+        year = ""
+        albumtitle = ""
+        track = ""
+        album_maxtracks = ""
+        cover = None
+        
         if surl.startswith("#custom:"):
             trackid = surl.replace("#custom:", "").strip()
             query = trackid
             artist = trackid.split(" - ")[0] if " - " in trackid else "Unknown"
             title = trackid.split(" - ")[1] if " - " in trackid else trackid
-            year = ""
-            albumtitle = ""
-            track = ""
-            album_maxtracks = ""
-            cover = None
         else:
             try:
                 trackid = surl.replace("https://open.spotify.com/track/", "").split("?")[0]
